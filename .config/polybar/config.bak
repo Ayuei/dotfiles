@@ -1,0 +1,226 @@
+[colors]
+background = #cc2a292a
+foreground = #ccc2c0c3
+white = #FFFF99
+brown = #add8e6
+primary = #ccffb52a
+secondary = #cce60053
+alert = #ccff0000
+background-alt = #cc88000000
+foreground-alt = #ccddd
+
+[bar/master]
+monitor = eDP-1
+width = 100%
+height = 55
+separator = " "
+background = ${colors.background}
+foreground = ${colors.foreground}
+underline-size = 0
+overline-size = 0
+tray-transparent = true
+
+font-0 = DejaVu Sans Mono:pixelsize=19:a    ntialias=false;1
+font-1 = Wuncon Siji:size=23;1
+font-2 = FontAwesome:pixelsize=23:antialias=false;1
+font-3 = Baekmuk Batang:pixelsize=20:antialias=false;1
+
+[bar/top]
+inherit = bar/master
+modules-left = wm title
+modules-center = time
+modules-right = spotify ram network cpu temperature pavolume battery
+
+padding-right = 1
+
+wm-restack = i3
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = #88000000
+label-focused-underline = #ddd
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+;spotify
+[module/spotify]
+
+type = custom/script
+tail = true
+exec = ~/.config/polybar/spotify.sh %artist% - %title%
+
+format-foreground = ${colors.white}
+
+format-prefix = ""
+fotmat-prefix-font = 1
+format-prefix-foreground = ${colors.white}
+internal = 1
+
+format-padding = 1
+
+[module/temperature]
+type = internal/temperature
+
+thermal-zone = 2
+
+format = <ramp> <label>
+format-padding = 1
+
+label-foreground = ${colors.white}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+ramp-foreground = ${colors.white}
+
+[module/ram]
+type = internal/memory
+interval = 3
+
+label-foreground = ${colors.white}
+label-padding = 1
+format-prefix = ""
+format-prefix-foreground = ${colors.white}
+format-padding = 1
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+label-foreground = ${colors.white}
+label-padding = 1
+format-prefix = ""
+format-prefix-foreground = ${colors.white}
+format-padding = 1
+
+[module/pavolume]
+type = custom/script
+interval = 2
+exec = ~/.config/polybar/pavolume.sh
+
+click-right = exec pavucontrol
+click-left = ~/.config/polybar/pavolume.sh --togmute
+scroll-up = ~/.config/polybar/pavolume.sh --up
+scroll-down = ~/.config/polybar/pavolume.sh --down
+
+label = %output%
+label-foreground = ${colors.white}
+format-padding = 1
+
+[module/network]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected = %{F#FFFF99} <label-connected> 
+format-connected-underline = ${colors.white}
+label-connected = %downspeed% %{F#ffb52a}
+label-connected-foreground = ${colors.white}
+format-disconnected = disconnected
+
+[module/title]
+type = internal/xwindow
+
+format-prefix = "  "
+format-foreground = ${colors.brown}
+
+label-foreground = ${colors.brown}
+label = "%title:0:35:...% "
+label-maxlen = 75
+
+[module/wm]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+enable-scroll = false
+pin-workspaces = true
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4=  5;
+ws-icon-5 = 6;
+ws-icon-6 = 7
+ws-icon-7 = 8
+ws-icon-8 = 9
+ws-icon-9 = 10
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.white}
+
+; focused = Active workspace on focused monitor
+label-focused = %index% %icon%
+label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index% %icon%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index% %icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index% %icon%
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+
+[module/time]
+type = internal/date
+interval = 40
+
+format-padding = 1
+
+label-foreground = #F88379
+date = "%b %e, %Y - %I:%M %p"
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+
+format-charging = %{F#ffb52a}<animation-charging> ⚡<label-charging>%{F-}
+format-charging-underline = ${colors.white}
+
+format-discharging = %{F#FFFF99}<ramp-capacity>%{F#FFFF99} <label-discharging>
+format-discharging-underline = ${colors.white}
+
+format-full-underline = #ffb52a
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.white}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${colors.white}
+animation-charging-framerate = 750
