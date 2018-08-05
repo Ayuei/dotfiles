@@ -1,1 +1,41 @@
-/home/vin/.Xresources
+Xft.dpi: 288
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+! Xft.rgba: rgba
+xft.font:xft:hack 40
+rofi.color-enabled: true
+rofi.color-window: argb:df292d37, #292d37, #17a086
+rofi.color-normal: argb:0292d37, #ffffff, argb:0292d37, argb:0292d37, #17a086
+rofi.color-active: argb:0292d37, #ffffff, argb:0292d37, argb:0292d37, #ffffff
+rofi.color-urgent: argb:0292d37, #ffffff, argb:0292d37, argb:0292d37, #ffffff
+
+rofi.font: System San Francisco Display 30
+rofi.eh: 1
+rofi.line-margin: 30
+rofi.separator-style: solid
+rofi.hide-scrollbar: true
+rofi.lines: 3
+rofi.width: 100
+rofi.padding: 800
+rofi.bw: 0
+rofi.auto-select: true
+#include ".Xresources.d/colors-base16-ocean"
+
+urxvt*font:xft:hack
+
+URxvt.internalBorder:60
+URxvt.scrollBar:false
+
+! Links
+URxvt.perl-ext:default,url-select
+URxvt.url-select.launcher:/usr/bin/xdg-open
+URxvt.url-select.underline:true
+URxvt.url-launcher:/usr/bin/firefox
+URxvt.perl-ext-common:font-size
+
+
+! Colors
+urxvt*depth:32

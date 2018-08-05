@@ -1,1 +1,1 @@
-/home/vin/.xinitrc
+exec i3
